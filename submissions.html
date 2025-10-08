@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Submissions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      color: #111;
+    }
+    header {
+      background-color: #4d148c;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #4d148c;
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .submission {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background-color: #fafafa;
+    }
+    .submission h3 {
+      margin: 0 0 10px;
+      color: #ff6600;
+    }
+    .submission p {
+      margin: 5px 0;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .logout {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      text-align: center;
+      padding: 10px;
+      background-color: #ff6600;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+    .logout:hover {
+      background-color: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <header>FedEx Admin Portal</header>
+
+  <div class="container">
+    <h2>Submitted Shipping Forms</h2>
+    <div id="submissionsList">Loading submissions...</div>
+
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+
+  <script>
+    async function loadSubmissions() {
+      try {
+        const res = await fetch('/data');
+        const data = await res.json();
+
+        if (!data || data.length === 0) {
+          document.getElementById('submissionsList').innerHTML = "<p>No submissions yet.</p>";
+          return;
+        }
+
+        let html = "";
+        data.forEach((item, index) => {
+          html += `
+            <div class="submission">
+              <h3>📦 ${item.name || 'Unnamed User'}</h3>
+              ${Object.entries(item).map(([key, value]) => {
+                if (key === "name") return "";
+                return `<p><strong>${key}:</strong> ${value}</p>`;
+              }).join("")}
+            </div>
+          `;
+        });
+
+        document.getElementById('submissionsList').innerHTML = html;
+      } catch (err) {
+        document.getElementById('submissionsList').innerHTML = "<p>Error loading submissions.</p>";
+        console.error(err);
+      }
+    }
+
+    loadSubmissions();
+  </script>
+</body>
+</html>

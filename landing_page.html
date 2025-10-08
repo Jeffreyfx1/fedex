@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FedEx Delivery Confirmation</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url("https://logonoid.com/images/thumbs/fedex-logo.png") center center no-repeat;
+    background-size: 600px; /* adjust this for size */
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: bold;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* white overlay to keep text readable */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 0;
+  }
+
+  .fedex-logo {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 2;
+  }
+
+  .fedex-logo span:first-child { color: #4D148C; }
+  .fedex-logo span:last-child { color: #FF6600; }
+
+  .tm {
+    font-size: 12px;
+    vertical-align: super;
+    color: #000;
+  }
+
+  .container {
+    max-width: 500px;
+    background: #fff;
+    margin: 120px auto;
+    padding: 30px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .header-img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  h2 {
+    margin-top: 25px;
+    font-size: 22px;
+    color: #000;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000;
+    margin-top: 15px;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background-color: #4D148C;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background-color: #3a0f6c;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 500px) {
+    .container { margin: 40px 20px; }
+    .fedex-logo { left: 15px; font-size: 24px; }
+    body {
+      background-size: 350px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="fedex-logo">
+  <span>Fed</span><span>Ex</span><span class="tm">™</span>
+</div>
+
+<div class="container">
+  <img class="header-img" src="assets/fedex_hand_at_the_top.jpg" alt="FedEx delivery photo">
+
+  <h2>Your Delivery Has Been Placed</h2>
+
+  <p>
+    Thank you for completing your delivery information.<br>
+    Your shipment request has been successfully received and confirmed by our FedEx delivery department.
+  </p>
+
+  <p>
+    Please go ahead and contact your assigned <b>Delivery Agent</b> to complete your delivery process and receive your tracking number.
+  </p>
+
+</div>
+
+</body>
+</html>

